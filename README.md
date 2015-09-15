@@ -15,7 +15,7 @@ features:
 
 Enviroment:
 -----------
-- IDE: Microsoft Visual Studio 2013 Ultimate Update 2
+- IDE: Microsoft Visual Studio 2013 Ultimate Update 2 with .Net Framework 4.5
 - OS: Microsoft Windows 8.1 Ultimate, 64 bit
 
 
