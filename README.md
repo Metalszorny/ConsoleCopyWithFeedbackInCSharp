@@ -7,6 +7,11 @@ About:
 A console copy that gives feedback of the state of the process.
 
 
+Used languages:
+---------------
+- C#
+
+
 features:
 ---------
 - Console Application
