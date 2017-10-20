@@ -33,7 +33,7 @@ namespace CpsCopy
                     try
                     {
                         // The source must not be empty.
-                        if (!string.IsNullOrEmpty(sourceRoute))
+                        if (!string.IsNullOrEmpty(sourceRoute) && !string.IsNullOrWhiteSpace(sourceRoute))
                         {
                             // The first argument must be an existing file.
                             if (!File.Exists(sourceRoute))
@@ -58,7 +58,7 @@ namespace CpsCopy
                     try
                     {
                         // The destination must not be empty.
-                        if (!string.IsNullOrEmpty(destinationRoute))
+                        if (!string.IsNullOrEmpty(destinationRoute) && !string.IsNullOrWhiteSpace(destinationRoute))
                         {
                             // If the second argument directory doesn't exist, then create it.
                             if (!Directory.Exists(destinationRoute))
@@ -87,7 +87,6 @@ namespace CpsCopy
 
                     while (!exitString)
                     {
-
                         #region Copy
 
                         try
@@ -100,7 +99,7 @@ namespace CpsCopy
                                         FileCopy.CopyProgressCallbackReason dwCallbackReason, IntPtr hSourceFile, IntPtr hDestinationFile, IntPtr lpData) =>
                                 {
                                     // Count the percentage of the done process.
-                                    var progress = (int)(((decimal)TotalBytesTransferred / (decimal)TotalFileSize) * 100);
+                                    int progress = (int)(((decimal)TotalBytesTransferred / (decimal)TotalFileSize) * 100);
 
                                     // Check if the files are transferred.
                                     if (progress == 100)
@@ -112,6 +111,7 @@ namespace CpsCopy
                                     if (progress <= 100)
                                     {
                                         Console.WriteLine(progress + "%");
+										
                                         return FileCopy.CopyProgressResult.PROGRESS_CONTINUE;
                                     }
 

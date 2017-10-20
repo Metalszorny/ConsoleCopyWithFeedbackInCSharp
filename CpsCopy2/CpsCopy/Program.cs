@@ -24,16 +24,16 @@ namespace CpsCopy
                 // Only start the process if two arguments are given.
                 if (args.Length == 2)
                 {
-                    var sourceRoute = args[0];
-                    var destinationRoute = args[1];
-                    var exit = false;
+                    string sourceRoute = args[0];
+                    string destinationRoute = args[1];
+                    bool exit = false;
 
                     #region Validation
 
                     try
                     {
                         // The source must not be empty.
-                        if (!string.IsNullOrEmpty(sourceRoute))
+                        if (!string.IsNullOrEmpty(sourceRoute) && !string.IsNullOrWhiteSpace(sourceRoute))
                         {
                             // The first argument must be an existing file.
                             if (!File.Exists(sourceRoute))
@@ -54,7 +54,7 @@ namespace CpsCopy
                     try
                     {
                         // The destination must not be empty.
-                        if (!string.IsNullOrEmpty(destinationRoute))
+                        if (!string.IsNullOrEmpty(destinationRoute) && !string.IsNullOrWhiteSpace(destinationRoute))
                         {
                             // If the second argument directory doesn't exist, then create it.
                             if (!Directory.Exists(destinationRoute))
@@ -84,10 +84,10 @@ namespace CpsCopy
                         // The source and destination must exist.
                         if (File.Exists(sourceRoute) && Directory.Exists(destinationRoute))
                         {
-                            decimal totalBytesTransferred=0;
-                            decimal lastTotalBytesTransferred=0;
-                            decimal totalFileSize;
-                            var progress = 0;
+                            decimal totalBytesTransferred = 0;
+                            decimal lastTotalBytesTransferred = 0;
+                            decimal totalFileSize = 0;
+                            int progress = 0;
 
                             // Run the copy process.
                             System.Threading.Tasks.Task.Run(() => 
@@ -105,24 +105,21 @@ namespace CpsCopy
                                     if (TotalBytesTransferred == TotalFileSize)
                                     {
                                         exit = true;
+										
                                         return FileCopy.CopyProgressResult.PROGRESS_CONTINUE;
                                     }
 
                                     return FileCopy.CopyProgressResult.PROGRESS_CONTINUE;
-
                                 });
                             });
-
 
                             do
                             {
                                 // Show the percentage of the done process.
                                 Console.Write("{0,3} % bytes/sec: {1, -25}  \r", progress, (totalBytesTransferred - lastTotalBytesTransferred) * 2);
                                 lastTotalBytesTransferred = totalBytesTransferred;
-
                                 System.Threading.Thread.Sleep(500);
                             } while (!exit);
-
                         }
                         else
                         {
@@ -137,7 +134,6 @@ namespace CpsCopy
                     }
 
                     #endregion Copy
-                    
                 }
                 else
                 {
