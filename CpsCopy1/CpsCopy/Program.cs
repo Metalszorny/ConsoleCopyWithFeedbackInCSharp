@@ -8,6 +8,8 @@ namespace CpsCopy
     /// </summary>
     class Program
     {
+		#region Methods
+		
         /// <summary>
         /// The Main method.
         /// </summary>
@@ -17,7 +19,7 @@ namespace CpsCopy
             try
             {
                 // Test input for development.
-                //args = new string[2]; 
+                //args = new string[2];
                 //args[0] = @"C:\Users\Admin\Desktop\movie.mkv";
                 //args[1] = @"C:\Users\Admin\Desktop\Movie";
 
@@ -40,11 +42,13 @@ namespace CpsCopy
                             {
                                 Console.WriteLine("Source file or route is not valid.");
                             }
+							// The source exists.
                             else
                             {
                                 Console.WriteLine("Source validated.");
                             }
                         }
+						// The source is empty.
                         else
                         {
                             Console.WriteLine("Source route is missing.");
@@ -63,14 +67,17 @@ namespace CpsCopy
                             // If the second argument directory doesn't exist, then create it.
                             if (!Directory.Exists(destinationRoute))
                             {
+								// Create destination directory.
                                 Directory.CreateDirectory(destinationRoute);
                                 Console.WriteLine("Destination created.");
                             }
+							// The destination exists.
                             else
                             {
                                 Console.WriteLine("Destination validated.");
                             }
                         }
+						// The destination is empty.
                         else
                         {
                             Console.WriteLine("Destination route is missing.");
@@ -118,6 +125,7 @@ namespace CpsCopy
                                     return FileCopy.CopyProgressResult.PROGRESS_STOP;
                                 });
                             }
+							// The source or destination does not exist.
                             else
                             {
                                 Console.WriteLine("Copy failed.");
@@ -131,7 +139,8 @@ namespace CpsCopy
                         #endregion Copy
                     }
                 }
-                else
+                // Not enough arguments are detected.
+				else
                 {
                     Console.WriteLine("Two arguments are required.");
                 }
@@ -141,5 +150,7 @@ namespace CpsCopy
                 Console.WriteLine("An error occured at the input reeding.");
             }
         }
+		
+		#endregion Methods
     }
 }

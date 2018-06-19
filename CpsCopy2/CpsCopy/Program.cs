@@ -8,6 +8,8 @@ namespace CpsCopy
     /// </summary>
     class Program
     {
+		#region Methods
+		
         /// <summary>
         /// The Main method.
         /// </summary>
@@ -17,7 +19,7 @@ namespace CpsCopy
             try
             {
                 // Test input for development.
-                //args = new string[2]; 
+                //args = new string[2];
                 //args[0] = @"C:\Users\Admin\Desktop\movie.mkv";
                 //args[1] = @"C:\Users\Admin\Desktop\Movie";
 
@@ -41,6 +43,7 @@ namespace CpsCopy
                                 Console.WriteLine("Source file or route is not valid.");
                             }
                         }
+						// The source is empty.
                         else
                         {
                             Console.WriteLine("Source route is missing.");
@@ -59,10 +62,12 @@ namespace CpsCopy
                             // If the second argument directory doesn't exist, then create it.
                             if (!Directory.Exists(destinationRoute))
                             {
+								// Create destination directory.
                                 Directory.CreateDirectory(destinationRoute);
                                 Console.WriteLine("Destination created.");
                             }
                         }
+						// The destination is empty.
                         else
                         {
                             Console.WriteLine("Destination route is missing.");
@@ -121,6 +126,7 @@ namespace CpsCopy
                                 System.Threading.Thread.Sleep(500);
                             } while (!exit);
                         }
+						// The source or destination does not exist.
                         else
                         {
                             exit = true;
@@ -135,6 +141,7 @@ namespace CpsCopy
 
                     #endregion Copy
                 }
+				// Not enough arguments are detected.
                 else
                 {
                     Console.WriteLine("Two arguments are required.");
@@ -145,5 +152,7 @@ namespace CpsCopy
                 Console.WriteLine("An error occured at the input reeding.");
             }
         }
+		
+		#endregion Methods
     }
 }
